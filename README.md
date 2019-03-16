@@ -1,5 +1,5 @@
-# Its anonymizer v.2
-This version of the its anonymizer processes files with a simple text editor, which allows to preserve original structure of the its file. It takes a path of the folder that contains the original its files (input its) and creates a copy of that folder with anonymized files  named 'inputfolder_itsFolder' on the same file location.
+# ITS file anonymizer
+This version of the its anonymizer processes files with a simple text editor, which allows to preserve original structure of the its file. It takes a path of the folder that contains the original its files (input its) and creates a copy of that folder with anonymized files  named 'inputfolder_anonymised' on the same file location.
 
 ##To use
 
@@ -12,9 +12,9 @@ The program will create a new folder in the same directory as the input folder a
 
 ##Changes
 
-Dates:		1000-01-01 00:00:00 (January 1, 1000, 12 AM)
-Time zone: 	AAA
-Gender: 		A
-Child key: 	9A99AAA999999A99
+    Dates:		1000-01-01 00:00:00 (January 1, 1000, 12 AM)
+    Time zone: 	AAA
+    Gender: 	A
+    Child key: 	9A99AAA999999A99
 
-This information is stored in `repacement_dict.json` will dictate what the anonymized file will have. This file can be modified to include other information that needs to be private.
+This information is stored in `replacement_dict.json` will dictate what the anonymized file will have. This file can be modified to include other information that needs to be private.
