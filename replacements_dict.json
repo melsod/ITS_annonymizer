@@ -4,6 +4,10 @@
         "Gender": "A",
         "ChildKey": "9A99AAA999999A99"
     },
+	"ITS":{
+		"fileName":"new_filename_1001",
+		"timeCreated":"1000-01-01"
+	},
     "TransferTime": {
         "TimeZone": "AAA",
         "UTCTime": "1000-01-01T00:00:00",
