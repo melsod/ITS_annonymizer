@@ -24,12 +24,14 @@ def parse_file(inFile, outFile, replacements):
                     # print(line)
                     if re.search(r'<{}\b'.format(node), line):  # word boundary is important here
                         for name, value in replacements[node].items():
-                            if node == "ITS" and name == "timeCreated":
-                                line = re.sub(r'{}="[0-9\-]*'.format(name),
-                                              r'{}="{}'.format(name, value),
+                            if isinstance(value,list):
+                                if bool(value[1]["only_time"]) is True:
+                                    line = re.sub(r'{}="[0-9\-]*'.format(name),
+                                              r'{}="{}'.format(name, value[0]["replace_value"]),
                                               line)
-                            else:
-                                line = re.sub(r'{}="[a-zA-Z0-9_.:\-]*"'.format(name),
+                                    continue
+                            
+                            line = re.sub(r'{}="[a-zA-Z0-9_.:\-]*"'.format(name),
                                               r'{}="{}"'.format(name, value),
                                               line)
                         # print('\t- changed {}/{} to {}'.format(node, name, value))

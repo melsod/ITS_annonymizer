@@ -18,3 +18,9 @@ The program will create a new folder in the same directory as the input folder a
     Child key: 	9A99AAA999999A99
 
 This information is stored in `replacement_dict.json` will dictate what the anonymized file will have. This file can be modified to include other information that needs to be private.
+
+If timestamps needs to be kept as it its the format will be the following:
+
+	"startClockTime": [{"replace_value":"1000-01-01"},{"only_time":"true"}]
+
+This will only replace the date and keep the timestamp for further analysis.

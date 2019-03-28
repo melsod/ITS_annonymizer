@@ -6,7 +6,7 @@
     },
 	"ITS":{
 		"fileName":"new_filename_1001",
-		"timeCreated":"1000-01-01"
+		"timeCreated":[{"replace_value":"1000-01-01"},{"only_time":"true"}]
 	},
     "TransferTime": {
         "TimeZone": "AAA",
@@ -35,12 +35,12 @@
         "rightBoundaryClockTime": "1000-01-01T00:00:00"
     },
     "Recording": {
-        "startClockTime": "1000-01-01T00:00:00",
-        "endClockTime": "1000-01-01T00:00:00"
+        "startClockTime": [{"replace_value":"1000-01-01"},{"only_time":"true"}],
+        "endClockTime": [{"replace_value":"1000-01-01"},{"only_time":"true"}]
     },
     "FiveMinuteSection": {
-        "startClockTime": "1000-01-01T00:00:00",
-        "endClockTime": "1000-01-01T00:00:00"
+        "startClockTime": [{"replace_value":"1000-01-01"},{"only_time":"true"}],
+        "endClockTime": [{"replace_value":"1000-01-01"},{"only_time":"true"}]
     },
     "Item": {
         "timeStamp": "1000-01-01T00:00:00"
