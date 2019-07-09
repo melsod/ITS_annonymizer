@@ -18,6 +18,8 @@ else:
 import webbrowser
 import its_anonymizer
 
+#chrome_path = 'C:\Program Files (x86)\Google\Chrome\Application/chrome.exe %s'
+
 
 class Anonymizer(object):
     
@@ -36,9 +38,9 @@ class Anonymizer(object):
         self.root.config(menu=self.menu)
         self.submenu = tk.Menu(self.menu, tearoff=0)
         self.menu.add_cascade(label='Menu', menu=self.submenu)
-        self.submenu.add_command(label = 'run standard anonymization...', command=self.anonymize_its_files_full)
+        #self.submenu.add_command(label = 'run standard anonymization...', command=self.anonymize_its_files_full)
         readme_link = 'https://github.com/BLLManitoba/ITS_anonymizer/blob/master/README.md'
-        self.submenu.add_command(label='Help', command=lambda: webbrowser.open_new(readme_link))
+        self.submenu.add_command(label='Help', command=lambda: webbrowser.open_new(readme_link)) # .get(chrome_path).open_new(readme_link))
 
         # Input/Output Selection Buttons
         self.input_dir_button = tk.Button(
@@ -47,7 +49,7 @@ class Anonymizer(object):
             command = self.select_input_its,
             height = 1,
             width = 20,
-            relief=tk.GROOVE).grid(row=0, column=0, padx=20, pady=5)
+            relief=tk.GROOVE).grid(row=0, column=0, padx=20, pady=5, sticky='W')
 
         self.output_dir_button = tk.Button(
             self.frame,
@@ -55,9 +57,12 @@ class Anonymizer(object):
             command = self.select_output_dir,
             height = 1,
             width = 20,
-            relief = tk.GROOVE).grid(row = 1, column = 0, padx=20, pady=5)
+            relief = tk.GROOVE).grid(row = 1, column = 0, padx=20, pady=5, sticky='W')
             
         # Type of info to anonymize checkbuttons
+        # I need to decide whether to use the more opaque but easier to use system that Momin made
+        # Or if I want to use the 5 main types of info to blur outlined by the non-functional HomeBank code
+        # 1. Serial#, 2.Gender, 3. Algorithm age, 4. Child ID, 5. Child Key
         self.primaryChild_checkbox = tk.Checkbutton(
             self.frame,
             text = 'Primary Child Data',
@@ -84,11 +89,26 @@ class Anonymizer(object):
             onvalue=True,
             offvalue=False).grid(row=4, column = 1, padx=5, pady=5, sticky='NW')
             
+        # Main (full) anonymizer button
+        self.full_anon_button = tk.Button(
+            self.frame,
+            text = 'Fully anonymize files',
+            command = self.anonymize_its_files_full,
+            height = 1,
+            width = 20,
+            relief = tk.GROOVE).grid(row = 5, column = 0, padx=5, pady=5, sticky='W')
+        
+        # Selective anonymizer button
+        self.anon_button = tk.Button(
+            self.frame,
+            text = 'Anonymize selected parts',
+            command = self.anonymize_its_files, #throws an error
+            height = 1,
+            width = 20,
+            relief = tk.GROOVE).grid(row = 5, column = 1, padx=5, pady=5, sticky='W')    
             
         # TODO:
-            # Add buttons to select directory of its files
             # Add a set of checkboxes to list off the things that they want anonymized
-            # Add a "save anonymized files as..." button so they can save the files in a specified location
             # Add a big old "anonymize" button :D
             
     def select_input_its(self):
