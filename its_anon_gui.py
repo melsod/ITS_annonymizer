@@ -16,7 +16,7 @@ else:
     from tkinter.messagebox import showwarning, askyesno, showinfo, showerror
     
 import webbrowser
-import its_anonymizer as anoner
+import its_anonymizer
 
 
 class Anonymizer(object):
@@ -36,7 +36,7 @@ class Anonymizer(object):
         self.root.config(menu=self.menu)
         self.submenu = tk.Menu(self.menu, tearoff=0)
         self.menu.add_cascade(label='Menu', menu=self.submenu)
-        self.submenu.add_command(label = 'run standard anonymization...')
+        self.submenu.add_command(label = 'run standard anonymization...', command=self.anonymize_its_files_full)
         readme_link = 'https://github.com/BLLManitoba/ITS_anonymizer/blob/master/README.md'
         self.submenu.add_command(label='Help', command=lambda: webbrowser.open_new(readme_link))
 
@@ -46,10 +46,27 @@ class Anonymizer(object):
             # Add a set of checkboxes to list off the things that they want anonymized
             # Add a "save anonymized files as..." button so they can save the files in a specified location
             # Add a big old "anonymize" button :D
+            
+            
+    def select_input_its(self):
+        # TODO: pull up a filechooser to select the directory of its files you want anonymized
+        #set that directory as your input directory
+        
+    def select_output_dir(self):
+        # TODO: pull up a filechooser to select where you want to save your anon'd files
+        # let them name the directory and then set that as the output dir
 
-    def anonymize_its_files(self):
+    def anonymize_its_files_full(self):
         print("anonymizing your its files the old fashioned way :P")
-        self.its_anonymizer.main()
+        # TDOD: add functionality to this function -> call an anonymizer object to anonymize the files???
+        #self.its_anonymizer.main()
+        
+    def select_items_anonymize(self):
+        #TODO: add funcionality to select the certain data to anonymize
+        # returns a list of things to anonymize
+        
+    def anonymize_its_files(self, anon_list):
+        #TODO: this function will take into account the list of things to anonymize and only blank out that stuff!
 
 
 if __name__ == '__main__':
