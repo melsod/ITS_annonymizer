@@ -17,11 +17,11 @@ def parse_file(inFile, outFile, replacements):
     with open(inFile, 'r') as inF:
         with open(outFile, 'w') as outF:
 
-            # print('\n' + os.path.split(inFile)[1] + ':')
+            print('\n' + os.path.split(inFile)[1] + ':')
 
             for line in inF:
                 for node in replacements.keys():
-                    # print(line)
+                    print(line)
                     if re.search(r'<{}\b'.format(node), line):  # word boundary is important here
                         for name, value in replacements[node].items():
                             if isinstance(value,list):
@@ -34,7 +34,7 @@ def parse_file(inFile, outFile, replacements):
                             line = re.sub(r'{}="[a-zA-Z0-9_.:\-]*"'.format(name),
                                               r'{}="{}"'.format(name, value),
                                               line)
-                        # print('\t- changed {}/{} to {}'.format(node, name, value))
+                        print('\t- changed {}/{} to {}'.format(node, name, value))
                 outF.write(line)
 
 
