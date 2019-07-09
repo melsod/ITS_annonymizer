@@ -17,11 +17,11 @@ def parse_file(inFile, outFile, replacements):
     with open(inFile, 'r') as inF:
         with open(outFile, 'w') as outF:
 
-            print('\n' + os.path.split(inFile)[1] + ':')
+            # print('\n' + os.path.split(inFile)[1] + ':')
 
             for line in inF:
                 for node in replacements.keys():
-                    print(line)
+                    # print(line)
                     if re.search(r'<{}\b'.format(node), line):  # word boundary is important here
                         for name, value in replacements[node].items():
                             if isinstance(value,list):
@@ -39,8 +39,11 @@ def parse_file(inFile, outFile, replacements):
 
 
 if __name__ == '__main__':
-    itsFolder = sys.argv[1]
-
+    #print(sys.argv[1])
+    #itsFolder = sys.argv[1]
+    itsFolder = "S:\Soderstrom-Lab\GitHubFiles\ITS_annonymizer\input_its_files"
+    print(itsFolder)
+    
     # Check that the ist files directory exists
     if not os.path.isdir(itsFolder):
         raise Exception('Not a valid folder name')
