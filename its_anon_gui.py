@@ -1,6 +1,6 @@
 # GUI builder for .its anonymizer app
 # Created by: Sarah MacEwan
-# Last Updated: July 9, 2019
+# Last Updated: July 10, 2019
 
 import sys
 import os
@@ -17,6 +17,7 @@ else:
     
 import webbrowser
 import its_anonymizer
+import json
 
 #chrome_path = 'C:\Program Files (x86)\Google\Chrome\Application/chrome.exe %s'
 
@@ -36,8 +37,10 @@ class Anonymizer(object):
         # Instance variables
         self.input_dir = None
         self.output_dir = None
-        # self.repFile = None # for now, just use the hard-coded replacements dict :)
-        self.repFile = 'partial_replacements_dict.json'
+        self.repFile = None # for now, just use the hard-coded replacements dict :)
+        self.repFileFullName = 'replacements_dict.json'
+        self.repFileFull = open(self.repFileFullName)
+        self.repDict = json.load(self.repFileFull)
 
         # Menu window
         self.menu = tk.Menu(self.root)
@@ -137,16 +140,32 @@ class Anonymizer(object):
             showwarning('Output folder', 'Please select an output folder')
             return
         print("anonymizing your its files the old fashioned way :P")
-        its_anonymizer.main(self.input_dir, self.output_dir, self.repFile)
+        its_anonymizer.main(self.input_dir, self.output_dir, self.repFileFullName)
         
-    def select_type_anonymize(self):
-        print('select the kinds of things you want to anonymize')
+    def create_partial_file(self):
         #TODO: add funcionality to select the certain data to anonymize
-        # returns a list of things to anonymize
+        print('making a partial replacements dictionary, based on what was selected...')
+        for node in self.repDict.keys():
+            for name, value in self.repDict[node].items():
+                print('name: ', name, 'value: ', value)
+                if name == 'dob' or name == 'DOB':
+                # currently this will not anonymize ANY of the data on lines in the xml file with dob or DOB
+                    del self.repDict[node]
+        with open('partial_replacements_dict.json', 'w') as repf:
+            json.dump(self.repDict, repf)
         
     def anonymize_its_files(self):
-        print('anonymizing files...')
-        #TODO: this function will take into account the list of things to anonymize and only blank out that stuff!
+        print('input is', self.input_dir)
+        print('output is', self.output_dir)
+        if self.input_dir == None:
+            showwarning('Input folder', 'Please select an input folder')
+            return
+        elif self.output_dir == None:
+            showwarning('Output folder', 'Please select an output folder')
+            return
+        print("anonymizing desired sections of its files...")
+        self.create_partial_file()
+        its_anonymizer.main(self.input_dir, self.output_dir, 'partial_replacements_dict.json')
 
 
 if __name__ == '__main__':
