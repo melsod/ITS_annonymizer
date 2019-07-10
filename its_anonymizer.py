@@ -34,11 +34,12 @@ def parse_file(inFile, outFile, replacements):
                             line = re.sub(r'{}="[a-zA-Z0-9_.:\-]*"'.format(name),
                                               r'{}="{}"'.format(name, value),
                                               line)
-                        print('\t- changed {}/{} to {}'.format(node, name, value))
+                        # print('\t- changed {}/{} to {}'.format(node, name, value))
                 outF.write(line)
 
 
-if __name__ == '__main__':
+#if __name__ == '__main__':
+def main():
     #print(sys.argv[1])
     #itsFolder = sys.argv[1]
     itsFolder = "S:\Soderstrom-Lab\GitHubFiles\ITS_annonymizer\input_its_files"

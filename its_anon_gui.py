@@ -126,7 +126,7 @@ class Anonymizer(object):
     def anonymize_its_files_full(self):
         print("anonymizing your its files the old fashioned way :P")
         # TDOD: add functionality to this function -> call an anonymizer object to anonymize the files???
-        #self.its_anonymizer.main()
+        its_anonymizer.main()
         
     def select_type_anonymize(self):
         print('select the kinds of things you want to anonymize')
