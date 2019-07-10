@@ -44,7 +44,7 @@ if __name__ == '__main__':
     itsFolder = "S:\Soderstrom-Lab\GitHubFiles\ITS_annonymizer\input_its_files"
     print(itsFolder)
     
-    # Check that the ist files directory exists
+    # Check that the its files directory exists
     if not os.path.isdir(itsFolder):
         raise Exception('Not a valid folder name')
 
