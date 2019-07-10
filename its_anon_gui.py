@@ -32,6 +32,12 @@ class Anonymizer(object):
         program_path = os.getcwd()
         self.frame = tk.Frame(root)
         self.frame.grid(row=0, column=0, sticky='wns', padx=(30, 30), pady=30)
+        
+        # Instance variables
+        self.input_dir = None
+        self.output_dir = None
+        # self.repFile = None # for now, just use the hard-coded replacements dict :)
+        self.repFile = 'partial_replacements_dict.json'
 
         # Menu window
         self.menu = tk.Menu(self.root)
@@ -45,7 +51,7 @@ class Anonymizer(object):
         # Input/Output Selection Buttons
         self.input_dir_button = tk.Button(
             self.frame,
-            text = 'Select input files', 
+            text = 'Select input folder', 
             command = self.select_input_its,
             height = 1,
             width = 20,
@@ -53,7 +59,7 @@ class Anonymizer(object):
 
         self.output_dir_button = tk.Button(
             self.frame,
-            text = 'Select output location',
+            text = 'Select output folder',
             command = self.select_output_dir,
             height = 1,
             width = 20,
@@ -111,29 +117,34 @@ class Anonymizer(object):
             
     def select_input_its(self):
         print('selecting inputs...')
-        input_dir = tkFileDialog.askdirectory()
-        return input_dir
+        self.input_dir = tkFileDialog.askdirectory()
         # TODO: pull up a filechooser to select the directory of its files you want anonymized
         #set that directory as your input directory
         
     def select_output_dir(self):
         print('selecting output dir...')
-        output_dir = tkFileDialog.askdirectory(title='Select where to save your output files')
-        return output_dir
+        self.output_dir = tkFileDialog.askdirectory(title='Select where to save your output files')
         # TODO: pull up a filechooser to select where you want to save your anon'd files
         # let them name the directory and then set that as the output dir
         
     def anonymize_its_files_full(self):
+        print('input is', self.input_dir)
+        print('output is', self.output_dir)
+        if self.input_dir == None:
+            showwarning('Input folder', 'Please select an input folder')
+            return
+        elif self.output_dir == None:
+            showwarning('Output folder', 'Please select an output folder')
+            return
         print("anonymizing your its files the old fashioned way :P")
-        # TDOD: add functionality to this function -> call an anonymizer object to anonymize the files???
-        its_anonymizer.main()
+        its_anonymizer.main(self.input_dir, self.output_dir, self.repFile)
         
     def select_type_anonymize(self):
         print('select the kinds of things you want to anonymize')
         #TODO: add funcionality to select the certain data to anonymize
         # returns a list of things to anonymize
         
-    def anonymize_its_files(self, anon_list):
+    def anonymize_its_files(self):
         print('anonymizing files...')
         #TODO: this function will take into account the list of things to anonymize and only blank out that stuff!
 
