@@ -143,7 +143,8 @@ class Anonymizer(object):
         its_anonymizer.main(self.input_dir, self.output_dir, self.repFileFullName)
         
     def create_partial_file(self):
-        #TODO: add funcionality to select the certain data to anonymize
+        # TODO: add funcionality to select the certain data to anonymize
+        # TODO: make it so what is deleted is in accordance with the checkboxes.
         print('making a partial replacements dictionary, based on what was selected...')
         for node in self.repDict.keys():
             for name, value in self.repDict[node].items():
