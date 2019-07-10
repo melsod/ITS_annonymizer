@@ -61,7 +61,7 @@ if __name__ == '__main__':
         os.mkdir(outFolder)
 
     # Load the replacements dictionary
-    replacements = load_replacements_file('./replacements_dict.json')
+    replacements = load_replacements_file('./partial_replacements_dict.json')
 
     # Process all files
     for inFile in files:

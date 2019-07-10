@@ -49,7 +49,7 @@ class Anonymizer(object):
             command = self.select_input_its,
             height = 1,
             width = 20,
-            relief=tk.GROOVE).grid(row=0, column=0, padx=20, pady=5, sticky='W')
+            relief=tk.GROOVE).grid(row=0, column=1, padx=20, pady=5, sticky='W')
 
         self.output_dir_button = tk.Button(
             self.frame,
@@ -57,37 +57,39 @@ class Anonymizer(object):
             command = self.select_output_dir,
             height = 1,
             width = 20,
-            relief = tk.GROOVE).grid(row = 1, column = 0, padx=20, pady=5, sticky='W')
+            relief = tk.GROOVE).grid(row = 1, column = 1, padx=20, pady=5, sticky='W')
             
         # Type of info to anonymize checkbuttons
         # I need to decide whether to use the more opaque but easier to use system that Momin made
         # Or if I want to use the 5 main types of info to blur outlined by the non-functional HomeBank code
         # 1. Serial#, 2.Gender, 3. Algorithm age, 4. Child ID, 5. Child Key
-        self.primaryChild_checkbox = tk.Checkbutton(
+        #ALTERNATELY: Child Age, Child Gender, Child ID, Child Key, Recording Datetime
+        tk.Label(self.frame, text = "Please select any information you do NOT want anonymized").grid(row=0, column=0, padx=5, pady=5, sticky='NW')
+        self.age_checkbox = tk.Checkbutton(
             self.frame,
-            text = 'Primary Child Data',
+            text = 'Child Age/Birthdate',
             onvalue=True,
-            offvalue=False).grid(row=0, column = 1, padx=5, pady=5, sticky='NW')
-        self.its_checkbox = tk.Checkbutton(
+            offvalue=False).grid(row=1, column = 0, padx=5, pady=5, sticky='NW')
+        self.gender_checkbox = tk.Checkbutton(
             self.frame,
-            text = 'ITS file data',
+            text = 'Child Gender',
             onvalue=True,
-            offvalue=False).grid(row=1, column = 1, padx=5, pady=5, sticky='NW')
-        self.transfer_checkbox = tk.Checkbutton(
+            offvalue=False).grid(row=2, column = 0, padx=5, pady=5, sticky='NW')
+        self.chiID_checkbox = tk.Checkbutton(
             self.frame,
-            text = 'File transfer data',
+            text = 'Child ID Number',
             onvalue=True,
-            offvalue=False).grid(row=2, column = 1, padx=5, pady=5, sticky='NW')
-        self.childInfo_checkbox = tk.Checkbutton(
+            offvalue=False).grid(row=3, column = 0, padx=5, pady=5, sticky='NW')
+        self.chiKey_checkbox = tk.Checkbutton(
             self.frame,
-            text = 'Child birthdate and gender',
+            text = 'Child Key',
             onvalue=True,
-            offvalue=False).grid(row=3, column = 1, padx=5, pady=5, sticky='NW')
-        self.clocktime_checkbox = tk.Checkbutton(
+            offvalue=False).grid(row=4, column = 0, padx=5, pady=5, sticky='NW')
+        self.datetime_checkbox = tk.Checkbutton(
             self.frame,
-            text = 'Clock start/stop',
+            text = 'Recording Date and Time',
             onvalue=True,
-            offvalue=False).grid(row=4, column = 1, padx=5, pady=5, sticky='NW')
+            offvalue=False).grid(row=5, column = 0, padx=5, pady=5, sticky='NW')
             
         # Main (full) anonymizer button
         self.full_anon_button = tk.Button(
@@ -96,20 +98,16 @@ class Anonymizer(object):
             command = self.anonymize_its_files_full,
             height = 1,
             width = 20,
-            relief = tk.GROOVE).grid(row = 5, column = 0, padx=5, pady=5, sticky='W')
+            relief = tk.GROOVE).grid(row = 2, column = 1, padx=5, pady=5)
         
         # Selective anonymizer button
         self.anon_button = tk.Button(
             self.frame,
-            text = 'Anonymize selected parts',
+            text = 'Partially anonymize files',
             command = self.anonymize_its_files, #throws an error
             height = 1,
             width = 20,
-            relief = tk.GROOVE).grid(row = 5, column = 1, padx=5, pady=5, sticky='W')    
-            
-        # TODO:
-            # Add a set of checkboxes to list off the things that they want anonymized
-            # Add a big old "anonymize" button :D
+            relief = tk.GROOVE).grid(row = 3, column = 1, padx=5, pady=5)
             
     def select_input_its(self):
         print('selecting inputs...')
