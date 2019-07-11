@@ -46,11 +46,12 @@ class Anonymizer(object):
         self.repDict = json.load(self.repFileFull)
         
         self.checkbuttonVals = []
-        self.ageVar= tk.IntVar()
-        self.gendVar= tk.IntVar()
-        self.IDVar= tk.IntVar()
-        self.keyVar= tk.IntVar()
-        self.timeVar= tk.IntVar()
+        self.primaryChildVar= tk.IntVar()
+        self.itsVar= tk.IntVar()
+        self.childInfoVar= tk.IntVar()
+        self.SRDIVar= tk.IntVar()
+        self.childVar = tk.IntVar()
+        self.timesVar = tk.IntVar()
 
         # Menu window
         self.menu = tk.Menu(self.root)
@@ -84,26 +85,30 @@ class Anonymizer(object):
         # 1. Serial#, 2.Gender, 3. Algorithm age, 4. Child ID, 5. Child Key
         # ALTERNATELY: Child Age, Child Gender, Child ID, Child Key, Recording Datetime
         tk.Label(self.frame, text = "Please select any information you do NOT want anonymized").grid(row=0, column=0, padx=5, pady=5, sticky='NW')
-        self.age_checkbox = tk.Checkbutton(
+        self.primary_child_checkbox = tk.Checkbutton(
             self.frame,
-            text = 'Child Age/Birthdate',
-            variable = self.ageVar).grid(row=1, column = 0, padx=5, pady=5, sticky='NW')
-        self.gender_checkbox = tk.Checkbutton(
+            text = 'PrimaryChild row',
+            variable = self.primaryChildVar).grid(row=1, column = 0, padx=5, pady=5, sticky='NW')
+        self.its_checkbox = tk.Checkbutton(
             self.frame,
-            text = 'Child Gender',
-            variable = self.gendVar).grid(row=2, column = 0, padx=5, pady=5, sticky='NW')
-        self.chiID_checkbox = tk.Checkbutton(
+            text = 'ITS row',
+            variable = self.itsVar).grid(row=2, column = 0, padx=5, pady=5, sticky='NW')
+        self.child_info_checkbox = tk.Checkbutton(
             self.frame,
-            text = 'Child ID Number',
-            variable = self.IDVar).grid(row=3, column = 0, padx=5, pady=5, sticky='NW')
-        self.chiKey_checkbox = tk.Checkbutton(
+            text = 'ChildInfo row',
+            variable = self.childInfoVar).grid(row=3, column = 0, padx=5, pady=5, sticky='NW')
+        self.srdi_info_checkbox = tk.Checkbutton(
             self.frame,
-            text = 'Child Key',
-            variable = self.keyVar).grid(row=4, column = 0, padx=5, pady=5, sticky='NW')
+            text = 'SRDI info row',
+            variable = self.SRDIVar).grid(row=4, column = 0, padx=5, pady=5, sticky='NW')
+        self.child_checkbox = tk.Checkbutton(
+            self.frame,
+            text = 'Child row',
+            variable = self.childVar).grid(row=5, column = 0, padx=5, pady=5, sticky='NW')
         self.datetime_checkbox = tk.Checkbutton(
             self.frame,
-            text = 'Recording Date and Time',
-            variable = self.timeVar).grid(row=5, column = 0, padx=5, pady=5, sticky='NW')
+            text = 'Time data rows',
+            variable = self.timesVar).grid(row=6, column = 0, padx=5, pady=5, sticky='NW')
             
         # Main (full) anonymizer button
         self.full_anon_button = tk.Button(
@@ -124,12 +129,15 @@ class Anonymizer(object):
             relief = tk.GROOVE).grid(row = 3, column = 1, padx=5, pady=5)
     
     def get_selection_values(self):
-        self.checkbuttonVals.append(self.ageVar.get())
-        self.checkbuttonVals.append(self.gendVar.get())
-        self.checkbuttonVals.append(self.IDVar.get())
-        self.checkbuttonVals.append(self.keyVar.get())
-        self.checkbuttonVals.append(self.timeVar.get())
-        print self.checkbuttonVals
+        self.checkbuttonVals = []
+        self.checkbuttonVals.append([['PrimaryChild'], self.primaryChildVar.get()])
+        self.checkbuttonVals.append([['ITS'], self.itsVar.get()])
+        self.checkbuttonVals.append([['ChildInfo'], self.childInfoVar.get()])
+        self.checkbuttonVals.append([['SRDInfo'], self.SRDIVar.get()])
+        self.checkbuttonVals.append([['Child'], self.childVar.get()])
+        self.checkbuttonVals.append([['TransferTime', 'Bar', 'BarSummary', 'Recording', 'FiveMinuteSection', 'Item'], self.timesVar.get()])
+        #print self.checkbuttonVals
+        return self.checkbuttonVals
     
     def select_input_its(self):
         print('selecting inputs...')
@@ -159,19 +167,34 @@ class Anonymizer(object):
         # TODO: add funcionality to select the certain data to anonymize
         # TODO: make it so what is deleted is in accordance with the checkboxes.
         print('making a partial replacements dictionary, based on what was selected...')
+        #self.repDict = json.load(self.repFileFull)
+        print('initial repDict: ', self.repDict)
         for node in self.repDict.keys():
-            for name, value in self.repDict[node].items():
-                print('name: ', name, 'value: ', value)
-                if name == 'dob' or name == 'DOB':
-                # currently this will not anonymize ANY of the data on lines in the xml file with dob or DOB
-                    del self.repDict[node]
+            #print node
+            for item in self.get_selection_values():
+                cbVal = item[1]
+                for selectName in item[0]:
+                    print "item name is: ", selectName
+                    if selectName == node:
+                        print('cbVal: ', cbVal)
+                        if cbVal == 1:
+                            print('deleting node: ', node)
+                            del self.repDict[node]
+           # for name, value in self.repDict[node].items():
+            #    print(node)
+                #for item in checbuttonVals:
+                #    if 
+                #elimVal = self.checkbuttonVals[index]
+                #if elimval == 1
+                #if 
+                #    del self.repDict[node]
         with open('partial_replacements_dict.json', 'w') as repf:
             json.dump(self.repDict, repf)
         
     def anonymize_its_files(self):
         print('input is', self.input_dir)
         print('output is', self.output_dir)
-        print('age checkbox vals are: ', self.get_selection_values())
+        #print('age checkbox vals are: ', self.get_selection_values())
         
         if self.input_dir == None:
             showwarning('Input folder', 'Please select an input folder')
