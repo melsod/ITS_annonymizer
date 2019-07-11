@@ -2,6 +2,9 @@
 # Created by: Sarah MacEwan
 # Last Updated: July 11, 2019
 
+# THIS IS A JANKY VERSION THAT REQUIRES THE USER TO KNOW WHAT LINES IN THE ITS FILE THEY WANT ANONYMIZED
+# TODO: add buttons for each line in the replacements dict, and then add elim functionality to the create partial file funciton
+
 import sys
 import os
 
@@ -11,7 +14,7 @@ if sys.version_info[0] == 2:
     from tkMessageBox import showwarning, askyesno, showinfo, showerror
 else:
     import tkinter as tk
-    from tkinter import PhotoImage
+    from tkinter import PhotoImage 
     from tkinter import filedialog as tkFileDialog
     from tkinter.messagebox import showwarning, askyesno, showinfo, showerror
     
