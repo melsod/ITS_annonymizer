@@ -28,6 +28,8 @@ This will only replace the date and keep the timestamp for further analysis.
 
 ## Checkbuttons
 
+Each checkbutton, if checked will exclude the corresponding row of data from anonymization. Data in each row are:
+
 1. PrimaryChild row: date of birth, gender, child key
 2. ITS row: file name, time file was created
 3. ChildInfo row: date of birht, gender
