@@ -28,9 +28,9 @@ This will only replace the date and keep the timestamp for further analysis.
 
 ## Checkbuttons
 
-PrimaryChild row: date of birth, gender, child key
-ITS row: file name, time file was created
-ChildInfo row: date of birht, gender
-SRDInfo row: serial number
-Child row: date of birth, gender, enrollment date, child ID, child key
-Time data rows: all instances of timestamps throughout the file (if "only_time" is set to true, the timestamps, but not dates, will be preserved)
+	PrimaryChild row: date of birth, gender, child key
+	ITS row: file name, time file was created
+	ChildInfo row: date of birht, gender
+	SRDInfo row: serial number
+	Child row: date of birth, gender, enrollment date, child ID, child key
+	Time data rows: all instances of timestamps throughout the file (if "only_time" is set to true, the timestamps, but not dates, will be preserved)
