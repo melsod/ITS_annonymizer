@@ -36,7 +36,7 @@ Several data points are anonymized when this program is run. See below for a des
 
 	In the ITS file, the filename is listed, which contains the recording upload date. Knowing the upload date and child's chronological age could allow for birthdates to be calculated.
 
-	NOTE: filename here is NOT the same as the name the file is saved as on your disk. This program makes no changes to the names of files, it only alters information within files.
+	NOTE: This is NOT the name the file is saved as on your disk. This program makes no changes to the names of files, it only alters information within files.
 
 3. Date information:
 
