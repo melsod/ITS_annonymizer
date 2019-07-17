@@ -25,23 +25,41 @@ Several different generic strings are used to replace identifying information, s
 Several data points are anonymized when this program is run. See below for a description of and rationale for replacing each item.
 
 1. Child's birthdate:
+
 	dob replaced with 1000-01-01
+	
 	NOTE: Child's chronological and estimated developmental ages are NOT anonymized, as this information may be needed for meaningful data analyses.
+
 2. Filename:
+
 	filename replaced with new_filename_1001
+
 	In the ITS file, the filename is listed, which contains the recording upload date. Knowing the upload date and child's chronological age could allow for birthdates to be calculated.
+
 	NOTE: filename here is NOT the same as the name the file is saved as on your disk. This program makes no changes to the names of files, it only alters information within files.
+
 3. Date information:
+
 	file upload date, transfer time, recording date, enrollment date, etc. replaced with 1000-01-01
+
 	Several places throughout the ITS, information about dates that correspond closely to the date the recording was made can be found. Rationale for anonymizing this information is the same as for the filename.
+
 4. Child ID:
+
 	id replaced with A999
+
 	Child ID is the ID given to the child by the lena system, and could be linked back to a participant name, depending on each lab's internal data storage setup.
+
 5. Timezone:
+
 	time zone replaced with AAA
+
 	The name of the recording's timezone is anonymized. However, the short version of the timezone name and whether or not they use daylight savings time is NOT anonymized, as this information may be needed for data analyses.
+
 6. Log file name:
+
 	logfile replaced with exec10001010T100010Z_job00000001-10001010_101010_100100.upl.log
+
 	The logfile name contains information about upload date, and the Child ID
 	
 There are some items that we decided to keep un-anonymous:
