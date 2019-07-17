@@ -1,12 +1,12 @@
 # ITS file anonymizer
 This version of the its anonymizer processes files via a text editor, which preserves the original structure of the its file.
-It allows the user to choose the folder that contains the original its files, and to choose the folder where they would like to save thier anonymized files.
+It allows the user to choose the folder that contains the original its files, and to choose the folder where they would like to save their anonymized files.
 
 ## To use
 
 1. Double click on the file 'its_anon_gui2.py' This will launch a user interface with several buttons
 2. Select input folder (allows user to choose input .its files)
-3. Select output folder (allows user to choose where to save anonymized files)
+3. Select output folder (allows user to choose where to save anonymized files - it is recommended to have an empty output folder already made!)
 4. Fully anonymize files (anonymizes all the sensitive/non-anonymous data in the files)
 5. Partially anonymize files (anonymizes only data specified)
 6. checkbuttons: when selected, the data in that row of the .its file will be left in its original format

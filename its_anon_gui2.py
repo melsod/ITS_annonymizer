@@ -1,9 +1,11 @@
 # GUI builder for .its anonymizer app
 # Created by: Sarah MacEwan
-# Last Updated: July 11, 2019
+# Last Updated: July 17, 2019
 
-# THIS IS A JANKY VERSION THAT REQUIRES THE USER TO KNOW WHAT LINES IN THE ITS FILE THEY WANT ANONYMIZED
-# TODO: add buttons for each line in the replacements dict, and then add elim functionality to the create partial file funciton
+# TODO:
+    # Don't anonymize gender, childkey, recorder SRDInfo, timestamps
+    # Do anonymize lines 28206, 28211, 28339
+    # Description of rationale behind each data point being anonymized, and behind what data is being left in (in the README).
 
 import sys
 import os
@@ -78,12 +80,7 @@ class Anonymizer(object):
             height = 1,
             width = 20,
             relief = tk.GROOVE).grid(row = 1, column = 1, padx=20, pady=5, sticky='W')
-            
-        # Type of info to anonymize checkbuttons
-        # I need to decide whether to use the more opaque but easier to use system that Momin made
-        # Or if I want to use the 5 main types of info to blur outlined by the non-functional HomeBank code
-        # 1. Serial#, 2.Gender, 3. Algorithm age, 4. Child ID, 5. Child Key
-        # ALTERNATELY: Child Age, Child Gender, Child ID, Child Key, Recording Datetime
+
         tk.Label(self.frame, text = "Please select any information you do NOT want anonymized").grid(row=0, column=0, padx=5, pady=5, sticky='NW')
         self.primary_child_checkbox = tk.Checkbutton(
             self.frame,
@@ -142,14 +139,10 @@ class Anonymizer(object):
     def select_input_its(self):
         print('selecting inputs...')
         self.input_dir = tkFileDialog.askdirectory()
-        # TODO: pull up a filechooser to select the directory of its files you want anonymized
-        # set that directory as your input directory
         
     def select_output_dir(self):
         print('selecting output dir...')
         self.output_dir = tkFileDialog.askdirectory(title='Select where to save your output files')
-        # TODO: pull up a filechooser to select where you want to save your anon'd files
-        # let them name the directory and then set that as the output dir
         
     def anonymize_its_files_full(self):
         print('input is', self.input_dir)
@@ -164,8 +157,6 @@ class Anonymizer(object):
         its_anonymizer.main(self.input_dir, self.output_dir, self.repFileFullName)
         
     def create_partial_file(self):
-        # TODO: add funcionality to select the certain data to anonymize
-        # TODO: make it so what is deleted is in accordance with the checkboxes.
         #print('making a partial replacements dictionary, based on what was selected...')
         #self.repDict = json.load(self.repFileFull)
         #print('initial repDict: ', self.repDict)
