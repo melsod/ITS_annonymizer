@@ -13,7 +13,7 @@ It allows the user to choose the folder that contains the original ITS files, an
 3. Select output folder (allows user to choose where to save anonymized files - it is recommended to have an empty output folder already made!)
 4. Click "Fully anonymize files" (anonymizes all the sensitive/non-anonymous data in the files - see below for details)
 
-#In development:
+### In development:
 
 5. Partially anonymize files (anonymizes only data specified)
 6. checkbuttons: when selected, the data in that row of the ITS file will be left in ITS original format
