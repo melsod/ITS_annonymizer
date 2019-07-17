@@ -99,7 +99,7 @@ class Anonymizer(object):
             variable = self.childInfoVar).grid(row=3, column = 0, padx=5, pady=5, sticky='NW')
         self.srdi_info_checkbox = tk.Checkbutton(
             self.frame,
-            text = 'SRDI info row',
+            text = 'SRD info row',
             variable = self.SRDIVar).grid(row=4, column = 0, padx=5, pady=5, sticky='NW')
         self.child_checkbox = tk.Checkbutton(
             self.frame,
@@ -160,25 +160,25 @@ class Anonymizer(object):
         elif self.output_dir == None:
             showwarning('Output folder', 'Please select an output folder')
             return
-        print("anonymizing your its files the old fashioned way :P")
+        print("Fully anonymizing your its files...")
         its_anonymizer.main(self.input_dir, self.output_dir, self.repFileFullName)
         
     def create_partial_file(self):
         # TODO: add funcionality to select the certain data to anonymize
         # TODO: make it so what is deleted is in accordance with the checkboxes.
-        print('making a partial replacements dictionary, based on what was selected...')
+        #print('making a partial replacements dictionary, based on what was selected...')
         #self.repDict = json.load(self.repFileFull)
-        print('initial repDict: ', self.repDict)
+        #print('initial repDict: ', self.repDict)
         for node in self.repDict.keys():
             #print node
             for item in self.get_selection_values():
                 cbVal = item[1]
                 for selectName in item[0]:
-                    print "item name is: ", selectName
+                    #print "item name is: ", selectName
                     if selectName == node:
-                        print('cbVal: ', cbVal)
+                        #print('cbVal: ', cbVal)
                         if cbVal == 1:
-                            print('deleting node: ', node)
+                            #print('deleting node: ', node)
                             del self.repDict[node]
            # for name, value in self.repDict[node].items():
             #    print(node)
