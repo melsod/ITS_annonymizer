@@ -1,5 +1,8 @@
 # ITS file anonymizer
-This version of the its anonymizer processes files via a text editor, which preserves the original structure of the its file.
+
+DISCLAIMER: Please read this readme carefully so that you ensure you understand what data are being anonymized, and what data are being left in their original format.
+
+This version of the its anonymizer processes files line-by-line via a text editor, preserveing the original structure of the its file.
 It allows the user to choose the folder that contains the original its files, and to choose the folder where they would like to save their anonymized files.
 
 ## To use

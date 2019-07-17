@@ -81,31 +81,31 @@ class Anonymizer(object):
             width = 20,
             relief = tk.GROOVE).grid(row = 1, column = 1, padx=20, pady=5, sticky='W')
 
-        tk.Label(self.frame, text = "Please select any information you do NOT want anonymized").grid(row=0, column=0, padx=5, pady=5, sticky='NW')
-        self.primary_child_checkbox = tk.Checkbutton(
-            self.frame,
-            text = 'PrimaryChild row',
-            variable = self.primaryChildVar).grid(row=1, column = 0, padx=5, pady=5, sticky='NW')
-        self.its_checkbox = tk.Checkbutton(
-            self.frame,
-            text = 'ITS row',
-            variable = self.itsVar).grid(row=2, column = 0, padx=5, pady=5, sticky='NW')
-        self.child_info_checkbox = tk.Checkbutton(
-            self.frame,
-            text = 'ChildInfo row',
-            variable = self.childInfoVar).grid(row=3, column = 0, padx=5, pady=5, sticky='NW')
-        self.srdi_info_checkbox = tk.Checkbutton(
-            self.frame,
-            text = 'SRD info row',
-            variable = self.SRDIVar).grid(row=4, column = 0, padx=5, pady=5, sticky='NW')
-        self.child_checkbox = tk.Checkbutton(
-            self.frame,
-            text = 'Child row',
-            variable = self.childVar).grid(row=5, column = 0, padx=5, pady=5, sticky='NW')
-        self.datetime_checkbox = tk.Checkbutton(
-            self.frame,
-            text = 'Time data rows',
-            variable = self.timesVar).grid(row=6, column = 0, padx=5, pady=5, sticky='NW')
+#        tk.Label(self.frame, text = "Please select any information you do NOT want anonymized").grid(row=0, column=0, padx=5, pady=5, sticky='NW')
+#        self.primary_child_checkbox = tk.Checkbutton(
+#            self.frame,
+#            text = 'PrimaryChild row',
+#            variable = self.primaryChildVar).grid(row=1, column = 0, padx=5, pady=5, sticky='NW')
+#        self.its_checkbox = tk.Checkbutton(
+#            self.frame,
+#            text = 'ITS row',
+#            variable = self.itsVar).grid(row=2, column = 0, padx=5, pady=5, sticky='NW')
+#        self.child_info_checkbox = tk.Checkbutton(
+#            self.frame,
+#            text = 'ChildInfo row',
+#            variable = self.childInfoVar).grid(row=3, column = 0, padx=5, pady=5, sticky='NW')
+#        self.srdi_info_checkbox = tk.Checkbutton(
+#            self.frame,
+#            text = 'SRD info row',
+#            variable = self.SRDIVar).grid(row=4, column = 0, padx=5, pady=5, sticky='NW')
+#        self.child_checkbox = tk.Checkbutton(
+#            self.frame,
+#            text = 'Child row',
+#            variable = self.childVar).grid(row=5, column = 0, padx=5, pady=5, sticky='NW')
+#        self.datetime_checkbox = tk.Checkbutton(
+#            self.frame,
+#            text = 'Time data rows',
+#            variable = self.timesVar).grid(row=6, column = 0, padx=5, pady=5, sticky='NW')
             
         # Main (full) anonymizer button
         self.full_anon_button = tk.Button(
@@ -117,13 +117,13 @@ class Anonymizer(object):
             relief = tk.GROOVE).grid(row = 2, column = 1, padx=5, pady=5)
         
         # Selective anonymizer button
-        self.anon_button = tk.Button(
-            self.frame,
-            text = 'Partially anonymize files',
-            command = self.anonymize_its_files, #throws an error
-            height = 1,
-            width = 20,
-            relief = tk.GROOVE).grid(row = 3, column = 1, padx=5, pady=5)
+ #       self.anon_button = tk.Button(
+ #           self.frame,
+ #           text = 'Partially anonymize files',
+ #           command = self.anonymize_its_files, #throws an error
+ #           height = 1,
+ #           width = 20,
+ #           relief = tk.GROOVE).grid(row = 3, column = 1, padx=5, pady=5)
     
     def get_selection_values(self):
         self.checkbuttonVals = []
