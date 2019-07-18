@@ -28,13 +28,13 @@ Several data points are anonymized when this program is run. See below for a des
 
 	dob replaced with 1000-01-01
 	
-	NOTE: Child's chronological and estimated developmental ages are NOT anonymized, as this information may be needed for meaningful data analyses.
+	NOTE: Child's "chronological age" and "estimated developmental age" are NOT anonymized, as this information may be needed for meaningful data analyses. Because they only give age in months, this is not sufficient detail to extract identity and therefore not of concern.
 
 2. Filename:
 
 	filename replaced with new_filename_1001
 
-	In the ITS file, the filename is listed, which contains the recording upload date. Knowing the upload date and child's chronological age could allow for birthdates to be calculated.
+	In the ITS file, the filename is listed, which contains the recording upload date and the Child ID. Knowing the upload date and child's exact age at recording could allow for birthdates to be calculated. Child ID may or may not contain identifiable information depending on a lab's data storage and labeling policy.
 
 	NOTE: This is NOT the name the file is saved as on your disk. This program makes no changes to the names of files, it only alters information within files.
 
@@ -48,7 +48,7 @@ Several data points are anonymized when this program is run. See below for a des
 
 	id replaced with A999
 
-	Child ID is the ID given to the child by the lena system, and could be linked back to a participant name, depending on each lab's internal data storage setup.
+	Child ID is the ID given to the child by the lena system, and could be linked back to a participant name, depending on each lab's data storage and labeling policy.
 
 5. Timezone:
 
@@ -74,10 +74,9 @@ There are some items that we decided to keep un-anonymous:
 	Information about the recording device and software it is using are kept. In the unlikely event that a given set of recorders or software are faulty, data that were collected on those devices can be flagged and excluded if necessary.
 5. Chronological age:
 	This information is left as is to allow for age-effect analyses.
-	Since date of birth and recording date information are being anonymized, chronological age information does not allow any private information about the participant to be calculated.
+	Because chronological age is listed only in months, this is not sufficient detail to extract date of birth and therefore not of concern, even if recording date were to be found from other sources.
 6. Group ID:
-	Recordings can be collected as a part of a larger group, and the group ID helps let researches know more information about what group or population the recording belongs to.
-	However, in some labs the group ID may be the SAME as the child ID. In these cases, changes will have to be made to the program to ensure this gets anonymized.
+	Group ID allows researchers to organize their data into meaningful groups. Typically this would not be of concern for anonymization. However, it is possible that in some labs the group ID may be the SAME as the child ID. In such situations, labs should check whether their Child ID/Group ID contains any non-anonymized information before using this program in its current form.
 	
 	
 ## Checkbuttons (in development)
