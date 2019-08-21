@@ -1,10 +1,8 @@
 # GUI builder for .its anonymizer app
 # Created by: Sarah MacEwan
-# Last Updated: July 17, 2019
+# Last Updated: August 21, 2019
 
 # TODO:
-    # Don't anonymize gender, childkey, recorder SRDInfo, timestamps
-    # Do anonymize lines 28206, 28211, 28339
     # Description of rationale behind each data point being anonymized, and behind what data is being left in (in the README).
 
 import sys
@@ -44,8 +42,8 @@ class Anonymizer(object):
         self.output_dir = None
         self.repFile = None # for now, just use the hard-coded replacements dict :)
         self.repFileFullName = 'replacements_dict.json'
-        self.repFileFull = open(self.repFileFullName)
-        self.repDict = json.load(self.repFileFull)
+        #self.repFileFull = open(self.repFileFullName)
+        #self.repDict = json.load(self.repFileFull)
         
         self.checkbuttonVals = []
         self.primaryChildVar= tk.IntVar()
@@ -81,11 +79,11 @@ class Anonymizer(object):
             width = 20,
             relief = tk.GROOVE).grid(row = 1, column = 1, padx=20, pady=5, sticky='W')
 
-#        tk.Label(self.frame, text = "Please select any information you do NOT want anonymized").grid(row=0, column=0, padx=5, pady=5, sticky='NW')
-#        self.primary_child_checkbox = tk.Checkbutton(
-#            self.frame,
-#            text = 'PrimaryChild row',
-#            variable = self.primaryChildVar).grid(row=1, column = 0, padx=5, pady=5, sticky='NW')
+        tk.Label(self.frame, text = "Please select which kind of information you do NOT want anonymized").grid(row=0, column=0, padx=5, pady=5, sticky='NW')
+        self.primary_child_checkbox = tk.Checkbutton(
+            self.frame,
+            text = 'Child Data',
+            variable = self.primaryChildVar).grid(row=1, column = 0, padx=5, pady=5, sticky='NW')
 #        self.its_checkbox = tk.Checkbutton(
 #            self.frame,
 #            text = 'ITS row',
@@ -102,10 +100,10 @@ class Anonymizer(object):
 #            self.frame,
 #            text = 'Child row',
 #            variable = self.childVar).grid(row=5, column = 0, padx=5, pady=5, sticky='NW')
-#        self.datetime_checkbox = tk.Checkbutton(
-#            self.frame,
-#            text = 'Time data rows',
-#            variable = self.timesVar).grid(row=6, column = 0, padx=5, pady=5, sticky='NW')
+        self.datetime_checkbox = tk.Checkbutton(
+            self.frame,
+            text = 'Time Data',
+            variable = self.timesVar).grid(row=2, column = 0, padx=5, pady=5, sticky='NW')
             
         # Main (full) anonymizer button
         self.full_anon_button = tk.Button(
@@ -117,23 +115,23 @@ class Anonymizer(object):
             relief = tk.GROOVE).grid(row = 2, column = 1, padx=5, pady=5)
         
         # Selective anonymizer button
- #       self.anon_button = tk.Button(
- #           self.frame,
- #           text = 'Partially anonymize files',
- #           command = self.anonymize_its_files, #throws an error
- #           height = 1,
- #           width = 20,
- #           relief = tk.GROOVE).grid(row = 3, column = 1, padx=5, pady=5)
+        self.anon_button = tk.Button(
+            self.frame,
+            text = 'Partially anonymize files',
+            command = self.anonymize_its_files, #throws an error
+            height = 1,
+            width = 20,
+            relief = tk.GROOVE).grid(row = 3, column = 1, padx=5, pady=5)
     
     def get_selection_values(self):
         self.checkbuttonVals = []
-        self.checkbuttonVals.append([['PrimaryChild'], self.primaryChildVar.get()])
-        self.checkbuttonVals.append([['ITS'], self.itsVar.get()])
-        self.checkbuttonVals.append([['ChildInfo'], self.childInfoVar.get()])
-        self.checkbuttonVals.append([['SRDInfo'], self.SRDIVar.get()])
-        self.checkbuttonVals.append([['Child'], self.childVar.get()])
-        self.checkbuttonVals.append([['TransferTime', 'Bar', 'BarSummary', 'Recording', 'FiveMinuteSection', 'Item'], self.timesVar.get()])
-        #print self.checkbuttonVals
+        self.checkbuttonVals.append([['PrimaryChild', 'ChildInfo', 'Child'], self.primaryChildVar.get()])
+        #self.checkbuttonVals.append([['ITS'], self.itsVar.get()])
+        #self.checkbuttonVals.append([['ChildInfo'], self.childInfoVar.get()])
+        #self.checkbuttonVals.append([['SRDInfo'], self.SRDIVar.get()])
+        #self.checkbuttonVals.append([['Child'], self.childVar.get()])
+        self.checkbuttonVals.append([['ITS', 'TransferTime', 'Bar', 'BarSummary', 'Recording', 'FiveMinuteSection', 'Item'], self.timesVar.get()])
+        print self.checkbuttonVals
         return self.checkbuttonVals
     
     def select_input_its(self):
@@ -150,52 +148,61 @@ class Anonymizer(object):
         if self.input_dir == None:
             showwarning('Input folder', 'Please select an input folder')
             return
-        elif self.output_dir == None:
+        if self.output_dir == None:
             showwarning('Output folder', 'Please select an output folder')
             return
         print("Fully anonymizing your its files...")
         its_anonymizer.main(self.input_dir, self.output_dir, self.repFileFullName)
         
     def create_partial_file(self):
-        #print('making a partial replacements dictionary, based on what was selected...')
-        #self.repDict = json.load(self.repFileFull)
-        #print('initial repDict: ', self.repDict)
-        for node in self.repDict.keys():
+        print('making a partial replacements dictionary, based on what was selected...')
+        with open(self.repFileFullName) as repFileFull:
+            self.repDict = json.load(repFileFull)
+            print('initial repDict: ', self.repDict)
+            for node in self.repDict.keys():
             #print node
-            for item in self.get_selection_values():
-                cbVal = item[1]
-                for selectName in item[0]:
+                for item in self.get_selection_values():
+                    cbVal = item[1]
+                    for selectName in item[0]:
                     #print "item name is: ", selectName
-                    if selectName == node:
+                        if selectName == node:
                         #print('cbVal: ', cbVal)
-                        if cbVal == 1:
+                            if cbVal == 1:
                             #print('deleting node: ', node)
-                            del self.repDict[node]
-           # for name, value in self.repDict[node].items():
-            #    print(node)
-                #for item in checbuttonVals:
-                #    if 
-                #elimVal = self.checkbuttonVals[index]
-                #if elimval == 1
-                #if 
-                #    del self.repDict[node]
-        with open('partial_replacements_dict.json', 'w') as repf:
-            json.dump(self.repDict, repf)
+                                del self.repDict[node]
+            #for name, value in self.repDict[node].items():
+             #   print(node)
+              #  for item in checbuttonVals:
+               #     elimVal = self.checkbuttonVals[index]
+                #    if elimVal == 
+                 #       del self.repDict[node]
+            with open('partial_replacements_dict.json', 'w') as repf:
+                json.dump(self.repDict, repf)
+                print repf
+        print "outside with block: repf: ", repf, " repFileFull: ", repFileFull
         
     def anonymize_its_files(self):
         print('input is', self.input_dir)
         print('output is', self.output_dir)
         #print('age checkbox vals are: ', self.get_selection_values())
-        
+        checkVals = self.get_selection_values()
+        chiSelVal = checkVals[0]
+        timeSelVal = checkVals[1]
+        numSelected = chiSelVal[1] + timeSelVal[1]
         if self.input_dir == None:
             showwarning('Input folder', 'Please select an input folder')
             return
-        elif self.output_dir == None:
+        if self.output_dir == None:
             showwarning('Output folder', 'Please select an output folder')
             return
+        #if numSelected == 0:
+         #   showwarning('Partial Anonymization', 'To partially analyze a file, at least one checkbox MUST be selected')
+          #  return
         print("anonymizing desired sections of its files...")
         self.create_partial_file()
         its_anonymizer.main(self.input_dir, self.output_dir, 'partial_replacements_dict.json')
+        
+        os.remove('partial_replacements_dict.json')
 
 
 if __name__ == '__main__':

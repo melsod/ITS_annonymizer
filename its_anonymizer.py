@@ -62,6 +62,8 @@ def main(inDir, outDir, repFile):
     #else:
     #    os.mkdir(outFolder)
     outFolder = outDir
+    if not os.path.isdir(outFolder):
+        raise Exception('Not a valid folder name')
     
     # Load the replacements dictionary
     #replacements = load_replacements_file('./partial_replacements_dict.json')
