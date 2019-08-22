@@ -27,11 +27,21 @@ its_anon_gui2.py relies on the following modules, which must also be installed o
 2. Select input folder (allows user to choose input ITS files)
 3. Select output folder (allows user to choose where to save anonymized files - it is recommended to have an empty output folder already made!)
 4. Click "Fully anonymize files" (anonymizes all the sensitive/non-anonymous data in the files - see below for details)
+5. OR Partially anonymize files:
+	1. Click the desired checkbuttons to leave the desired data in the ITS file's original format.
+	2. Click "Partially anonymize files"(anonymizes only data specified)
+	
+### Checkbuttons
 
-### In development:
+Each checkbutton, if checked will exclude the corresponding row of data from anonymization. Data in each row are:
 
-5. Partially anonymize files (anonymizes only data specified)
-6. checkbuttons: when selected, the data in that row of the ITS file will be left in ITS original format
+1. Child Data
+	1. PrimaryChild row: date of birth
+	2. ChildInfo row: date of birth
+	3. Child row: date of birth, enrollment date, child ID
+2. Time Data
+	1. ITS row: file name, time file was created
+	2. All instances of timestamps throughout the file (if "only_time" is set to true, the timestamps, but not dates, will be preserved)
 
 ## Anonymization and Rationale
 
@@ -88,17 +98,6 @@ There are some items that we decided to keep un-anonymous:
 	Group ID allows researchers to organize their data into meaningful groups. Typically this would not be of concern for anonymization. However, it is possible that in some labs the group ID may be the SAME as the child ID. In such situations, labs should check whether their Child ID/Group ID contains any non-anonymized information before using this program in its current form.
 7. Timezone:
 	The recording's timezone, the short version of the timezone name, and whether or not daylight savings time is used is NOT anonymized, as this information may be needed for data analyses.
-	
-## Checkbuttons (in development)
-
-Each checkbutton, if checked will exclude the corresponding row of data from anonymization. Data in each row are:
-
-1. PrimaryChild row: date of birth, gender, child key
-2. ITS row: file name, time file was created
-3. ChildInfo row: date of birht, gender
-4. SRDInfo row: serial number
-5. Child row: date of birth, gender, enrollment date, child ID, child key
-6. Time data rows: all instances of timestamps throughout the file (if "only_time" is set to true, the timestamps, but not dates, will be preserved)
 
 ## Contact
 
