@@ -36,12 +36,10 @@ its_anon_gui2.py relies on the following modules, which must also be installed o
 Each checkbutton, if checked will exclude the corresponding row of data from anonymization. Data in each row are:
 
 1. Child Data
-	1. PrimaryChild row: date of birth
-	2. ChildInfo row: date of birth
-	3. Child row: date of birth, enrollment date, child ID
+	* date of birth, enrollment date, child ID
 2. Time Data
-	1. ITS row: file name, time file was created
-	2. All instances of timestamps throughout the file (if "only_time" is set to true, the timestamps, but not dates, will be preserved)
+	* File name, time file was created
+	* All instances of timestamps throughout the file (if "only_time" is set to true in the json file, the hhmmss timestamps will be preserved with the dates anonymized)
 
 ## Anonymization and Rationale
 
